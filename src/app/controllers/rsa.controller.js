@@ -3,7 +3,7 @@ const crypto = require('crypto')
 const hasString = require('../util/hashString')
 const encryption = require('../util/encrypt')
 const decryption = require('../util/decrypt')
-const { MODULE_LENGTH, STRING_TYPE } = require('../constants')
+const { MODULE_LENGTH, STRING_TYPE, RSA_TABLE } = require('../constants')
 const bufferHandle = require('../util/bufferHandle')
 
 class RSAController {
@@ -17,7 +17,7 @@ class RSAController {
       if (err) throw err
 
       try {
-        await supabase.from('RSA_Account').upsert(
+        await supabase.from(RSA_TABLE).upsert(
           {
             email: email,
             hashPassword: hasString(password),
@@ -46,7 +46,6 @@ class RSAController {
           (err, publicKey, privateKey) => {
             if (err) {
               throw err
-              next(err)
             }
             console.log('Complete Generating')
             return res.status(200).json({
@@ -96,7 +95,7 @@ class RSAController {
 
     try {
       const { data, error } = await supabase
-        .from('RSA_Account')
+        .from(RSA_TABLE)
         .select('passphrase')
         .eq('email', email)
         .eq('hashPassword', hashPassword)

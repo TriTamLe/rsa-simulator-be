@@ -4,5 +4,6 @@ const STRING_TYPE = {
   UTF8: 'utf-8',
   BASE64: 'base64',
 }
+const RSA_TABLE = 'RSA_Account'
 
-module.exports = { MODULE_LENGTH, STRING_TYPE }
+module.exports = { MODULE_LENGTH, STRING_TYPE, RSA_TABLE }

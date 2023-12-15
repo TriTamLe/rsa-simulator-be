@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const PORT = process.env.PORT || 5000
 const supabase = require('./app/config/index')
+const { RSA_TABLE } = require('./app/constants')
 
 app.use(bodyParser.json())
 app.use(express.json())
@@ -15,9 +16,10 @@ route(app)
 
 // check database
 supabase
-  .from('RSA_Account')
+  .from(RSA_TABLE)
   .select('*')
   .then((data) => {
+    console.log(data)
     if (data.data) console.log('Connect to database successfully')
     else console.log('There is problem when connecting to database')
   })
