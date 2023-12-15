@@ -19,7 +19,6 @@ supabase
   .from(RSA_TABLE)
   .select('*')
   .then((data) => {
-    console.log(data)
     if (data.data) console.log('Connect to database successfully')
     else console.log('There is problem when connecting to database')
   })
